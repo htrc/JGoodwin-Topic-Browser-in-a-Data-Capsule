@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="wf-myriadpro-n7-active wf-ffmetaserifwebpro-n7-active wf-ffmetaserifwebpro-n5-active wf-ffmetaserifwebpro-i5-active wf-ffmetaserifwebpro-i7-active wf-myriadpro-i7-active wf-myriadpro-i4-active wf-myriadpro-n4-active wf-active"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta property="og:type" content="article">
+<meta property="og:image" content="http://jgoodwin.net/images/profile.jpg">
+<meta property="og:title" content="Creating a Topic Browser of HathiTrust Data">
+<meta property="og:site_name" content="Jonathan Goodwin">
+<meta property="og:url" content="https://jgoodwin.net/blog/creating-hathitrust-topic-browser/">
+<meta property="article:published_time" content="2015-09-22">
+<meta property="article:author" content="Jonathan Goodwin">
+
+
+
+
+
+    
+    <title> Creating a Topic Browser of HathiTrust Data </title>
+    <link rel="canonical" href="https://jgoodwin.net/blog/creating-hathitrust-topic-browser/">
+    
+
+    <link rel="stylesheet" href="Creating%20a%20Topic%20Browser%20of%20HathiTrust%20Data%20--%20with-edits_files/poole.css">
+<link rel="stylesheet" href="Creating%20a%20Topic%20Browser%20of%20HathiTrust%20Data%20--%20with-edits_files/hyde.css">
+<link rel="stylesheet" href="Creating%20a%20Topic%20Browser%20of%20HathiTrust%20Data%20--%20with-edits_files/syntax.css">
+
+<script src="Creating%20a%20Topic%20Browser%20of%20HathiTrust%20Data%20--%20with-edits_files/ylv4vsz.js"></script>
+<style type="text/css">.tk-ff-meta-serif-web-pro{font-family:"ff-meta-serif-web-pro",serif;}.tk-myriad-pro{font-family:"myriad-pro",sans-serif;}</style><style type="text/css">@font-face{font-family:ff-meta-serif-web-pro;src:url(https://use.typekit.net/af/63e161/000000000000000000011901/23/l?subset_id=2&fvd=i5&v=3) format("woff2"),url(https://use.typekit.net/af/63e161/000000000000000000011901/23/d?subset_id=2&fvd=i5&v=3) format("woff"),url(https://use.typekit.net/af/63e161/000000000000000000011901/23/a?subset_id=2&fvd=i5&v=3) format("opentype");font-weight:500;font-style:italic;}@font-face{font-family:ff-meta-serif-web-pro;src:url(https://use.typekit.net/af/1fda60/000000000000000000011903/23/l?subset_id=2&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/1fda60/000000000000000000011903/23/d?subset_id=2&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/1fda60/000000000000000000011903/23/a?subset_id=2&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;}@font-face{font-family:ff-meta-serif-web-pro;src:url(https://use.typekit.net/af/f808ff/000000000000000000011902/23/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/f808ff/000000000000000000011902/23/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/f808ff/000000000000000000011902/23/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;}@font-face{font-family:ff-meta-serif-web-pro;src:url(https://use.typekit.net/af/d4613e/000000000000000000011900/23/l?subset_id=2&fvd=n5&v=3) format("woff2"),url(https://use.typekit.net/af/d4613e/000000000000000000011900/23/d?subset_id=2&fvd=n5&v=3) format("woff"),url(https://use.typekit.net/af/d4613e/000000000000000000011900/23/a?subset_id=2&fvd=n5&v=3) format("opentype");font-weight:500;font-style:normal;}@font-face{font-family:myriad-pro;src:url(https://use.typekit.net/af/b8c4e8/0000000000000000000151db/23/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/b8c4e8/0000000000000000000151db/23/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/b8c4e8/0000000000000000000151db/23/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;}@font-face{font-family:myriad-pro;src:url(https://use.typekit.net/af/8df503/0000000000000000000151dc/23/l?subset_id=2&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/8df503/0000000000000000000151dc/23/d?subset_id=2&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/8df503/0000000000000000000151dc/23/a?subset_id=2&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;}@font-face{font-family:myriad-pro;src:url(https://use.typekit.net/af/71ee78/0000000000000000000151dd/23/l?subset_id=2&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/71ee78/0000000000000000000151dd/23/d?subset_id=2&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/71ee78/0000000000000000000151dd/23/a?subset_id=2&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;}@font-face{font-family:myriad-pro;src:url(https://use.typekit.net/af/9bffeb/0000000000000000000151e0/23/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/9bffeb/0000000000000000000151e0/23/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/9bffeb/0000000000000000000151e0/23/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;}</style><script>try{Typekit.load();}catch(e){}</script>
+
+
+    <link rel="shortcut icon" href="https://jgoodwin.net/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://jgoodwin.net/apple-touch-icon.png">
+</head>
+
+<body class="editable" itemscope="" itemtype="http://schema.org/Article" lang="en"><title>Creating a Topic Browser of HathiTrust Data</title><title>Creating a Topic Browser of HathiTrust Data</title><title>Creating a Topic Browser of HathiTrust Data</title><title>Creating a Topic Browser of HathiTrust Data</title><title>Creating a Topic Browser of HathiTrust Data</title><div class="sidebar"><div class="container sidebar-sticky"><div class="sidebar-about"><h1>Jonathan Goodwin</h1></div><ul class="catlist">
+
+          <li><a href="https://jgoodwin.net/"><span>About</span></a></li>
+
+            <li><a href="https://jgoodwin.net/cv-jonathan-goodwin/"><span>CV</span></a></li>
+            <li><a href="https://jgoodwin.net/teaching/"><span>Teaching</span></a></li>
+
+            <li><a href="https://jgoodwin.net/blog/"><span>Blog</span></a></li>
+
+</ul></div></div><div class="content container"><section id="main"><div class="post"><h1 class="post-title">Creating a Topic Browser of HathiTrust Data</h1><section id="datecount"><h5 id="date">Tue Sep 22, 2015</h5></section><article class="entry-content" id="content"><p>The “Word Frequencies in English-Language Literature, 1700-1922” <a href="https://sharc.hathitrust.org/genre">data set</a> from the <a href="http://hathitrust.org/">HathiTrust</a> digital library was released last month. (See Ted Underwood’s <a href="http://tedunderwood.com/2015/08/07/a-dataset-for-distant-reading-literature-in-english-1700-1922/">post</a>
+ for more detail.) It contains word-frequency lists of texts from the 
+digitized HathiTrust collection published between 1700-1922 that are 
+divided into fiction, poetry, and drama. (A description of the method 
+used to classify the documents can be found <a href="http://figshare.com/articles/Understanding_Genre_in_a_Collection_of_a_Million_Volumes_Interim_Report/1281251">here</a>.)</p><p><strong>[Note: Data Set link goes to blank gray page]</strong></p><p>There
+ are many approaches to exploring this data. What I’m going to describe 
+is building a topic browser of a model created with LDA. I’ll be using 
+slightly modified versions of Andrew Goldstone’s <a href="http://github.com/agoldst/dfrtopics">dfrtopics</a> and <a href="http://github.com/agoldst/dfr-browser">dfr-browser</a>. (See this <a href="http://andrewgoldstone.com/blog/2015/09/17/dfrtopics-update/">post</a>
+ for more detail on Goldstone’s powerful, flexible, and well-documented 
+package.) This browser is a wonderfully detailed interactive topic-model
+ visualization: for examples of it being used to visualize models 
+created from JSTOR’s Data for Research, see <a href="http://signsat40.signsjournal.org/topic-model/">Signs</a>, <a href="http://www.rci.rutgers.edu/%7Eag978/quiet/">seven literary studies journals</a>, and the <a href="http://jgoodwin.net/jml-browser">Journal of Modern Literature</a>.</p><p>[Update: 10/10/15. Andrew has <a href="http://andrewgoldstone.com/blog/2015/09/23/hathi/">written</a>
+ a very useful post detailing some updates to his package that make it 
+easier to work with HathiTrust data. Where his instructions conflict 
+with mine below, I recommend his approach.]</p><h4 id="data-gathering-and-preparation">Data Gathering and Preparation</h4><p>The first step is to download the <a href="http://data.sharc.hathitrust.org/genre/fiction_metadata.csv">fiction_metadata.csv</a>. Then we will select the slice of the fiction data from <a href="http://data.sharc.hathitrust.org/genre/fiction_1920-1922.tar.gz">1920-22</a>. I would put the latter file into a directory named “tsv”. Enter that directory and type:</p><p><strong>[Note: '1920-20' is in fact a link to .tar.gz file of the data.]</strong></p><p><strong>[Note: reproducing steps on Data Capsule:<br>&nbsp; &nbsp; ssh -p 16122 dcuser@peachpalm.pti.indiana.edu<br>&nbsp; &nbsp; cd research/code-managed/<br style="">&nbsp; &nbsp;<em> git clone &nbsp;https://github.com/htrc/HTRC-Dataset-Healthcheck.git&nbsp;</em><br></strong><strong>&nbsp; &nbsp; cd HTRC-Dataset-Healthcheck/jgoodwin-topic-browser<br>&nbsp; &nbsp; source SETUP.bash<br>&nbsp; &nbsp; R<br><span class="sw-mn-ph">&nbsp;</span></strong><strong>]&nbsp;</strong></p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">tar -xfz fiction_1920-1922.tar.gz
+</pre></div><p><strong>[Note:<br style="">&nbsp; &nbsp; ./GET-UPSTREAM-DATASET.sh&nbsp;<br style="">]&nbsp;</strong></p><p>(You may also use a GUI archive utility, depending on your preferences and platform.)</p><p>There
+ will now be six thousand or so *.tsv files in the directory. In order 
+to process them, we will need to filter the metadata file so that it 
+matches the files we’ve downloaded. For this task and many of the 
+others, I’ll be using R.&nbsp;</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">library<span style="color: #000000; font-weight: bold">(</span>dplyr<span style="color: #000000; font-weight: bold">)</span>
+setwd<span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">"~/hathi/"</span><span style="color: #000000; font-weight: bold">)</span>
+meta <span style="color: #ce5c00; font-weight: bold">&lt;-</span> read.csv<span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">"fiction_metadata.csv"</span><span style="color: #000000; font-weight: bold">,</span> stringsAsFactors<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #204a87; font-weight: bold">FALSE</span><span style="color: #000000; font-weight: bold">)</span>
+meta <span style="color: #ce5c00; font-weight: bold">&lt;-</span> filter<span style="color: #000000; font-weight: bold">(</span>meta<span style="color: #000000; font-weight: bold">,</span>date <span style="color: #ce5c00; font-weight: bold">&gt;=</span> <span style="color: #0000cf; font-weight: bold">1920</span><span style="color: #000000; font-weight: bold">)</span>
+</pre></div><p>The <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">dpylr</a>
+ package is not strictly necessary to perform these tasks, but my 
+examples will rely on it. If you don’t have it installed, you’ll need to
+ <code>install.packages("dplyr")</code> first. Also, change “~/hathi” above to whatever directory you stored your “fiction_metadata.csv” file in.</p><p><strong>[Note: Yes you do indeed, on the first occasion, need to do from within R<br style="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - install.packages("dplyr")<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The NZ mirror is '56' (1 Dec 2018, was previously 55).&nbsp;<br>&nbsp; &nbsp;+ require(devtools)<br style="">&nbsp; &nbsp;+ install_version("dplyr", version = "0.4.3", repos = "http://cran.us.r-project.org")&nbsp;<br></strong><strong><br>This takes quite a while to compile everything up, but once done ...<br></strong></p><p><strong>The actual sequence to process the files has been put in the file 'filter.R' which can be run:<br style="">&nbsp; &nbsp; source("filter.R")<br style="">In this file, the 'setwd' has been omitted. &nbsp;The script assumes you run it from the directory where 'filter.R' is.<br>Further,
+ the particular sequence of filtering encoded in this file is the final 
+de-duplication technique settled on in the section that follows.<br style="">]&nbsp;</strong></p><h4 id="duplicates">Duplicates</h4><p>We
+ now have a data frame that matches what we have in our “tsv” directory.
+ If you start to examine its contents, you will notice several things. 
+Perhaps the most difficult of these from a modeling perspective is that 
+there a large number of duplicate texts. Some are exact copies, and some
+ are clearly the same book with minor modifications in the associated 
+metadata. Eliminating these programmatically is surprisingly difficult. I
+ have found no consistently reliable method. One approach would be to 
+eliminate exact title duplicates before filtering (this might also help 
+with the reprints problem discussed below):</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">meta <span style="color: #ce5c00; font-weight: bold">&lt;-</span> distinct<span style="color: #000000; font-weight: bold">(</span>meta<span style="color: #000000; font-weight: bold">,</span>title<span style="color: #000000; font-weight: bold">)</span>
+</pre></div><p>If you enter the above command before filtering by date, 
+your titles will be reduced from 6019 to 3014. After, to 3692. The 
+problem with the former approach, of course, is that different books can
+ have the same title. This problem is less pronounced with a 
+chronologically reduced slice, but it’s still there. Either approach 
+will still keep many duplicates whose titles do not match exactly. 
+Normalizing the titles by case and eliminating punctuation marks would 
+help, I think, but I’m not going to describe that step here. What I 
+recommend is writing the file out and reviewing it in a spreadsheet 
+program. Use that program’s sort features to identify duplicate titles 
+(and also reprints, if that concerns you), and manually delete them. 
+This approach is manageable for smaller slices of the data, but it would
+ not be practical for the entire file.</p><p>To write your csv file for processing,</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">write.csv<span style="color: #000000; font-weight: bold">(</span>meta<span style="color: #000000; font-weight: bold">,</span> file<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #4e9a06">"fiction_metadata_1920-22.csv"</span><span style="color: #000000; font-weight: bold">,</span> row.names<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #204a87; font-weight: bold">FALSE</span><span style="color: #000000; font-weight: bold">)</span>
+</pre></div><p>I use OpenOffice’s Calc for reviewing the data. Make sure
+ to export the results as a csv file. The defaults for separators and 
+quotes should be fine. I do not know about Excel’s behavior, but make 
+sure that nothing has been changed in the format. If it is, the 
+following steps will likely fail.</p><h4 id="reprints">Reprints</h4><p>There
+ are many reprints in this world. If you manually processed your 
+filtered csv file, you doubtlessly noticed many prominent 18th and 19th C
+ authors in your data. If you took the most aggressive approach to 
+eliminating duplicates described above (selecting distinct titles before
+ filtering by date), these are the most prolific authors left in the 
+1920-22 data:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">meta <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+group_by<span style="color: #000000; font-weight: bold">(</span>author<span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+summarise<span style="color: #000000; font-weight: bold">(</span>count<span style="color: #ce5c00; font-weight: bold">=</span>n<span style="color: #000000; font-weight: bold">())</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+arrange<span style="color: #000000; font-weight: bold">(</span>desc<span style="color: #000000; font-weight: bold">(</span>count<span style="color: #000000; font-weight: bold">))</span>
+</pre></div><table>
+<thead>
+<tr>
+<th>author</th>
+<th align="center">count</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>France, Anatole</td>
+<td align="center">14</td>
+</tr>
+
+<tr>
+<td>Hope, Laura Lee</td>
+<td align="center">14</td>
+</tr>
+
+<tr>
+<td>Fitzhugh, Percy Keese</td>
+<td align="center">12</td>
+</tr>
+
+<tr>
+<td>Fletcher, J. S.</td>
+<td align="center">10</td>
+</tr>
+
+<tr>
+<td>Curwood, James Oliver</td>
+<td align="center">9</td>
+</tr>
+
+<tr>
+<td>Grey, Zane</td>
+<td align="center">9</td>
+</tr>
+
+<tr>
+<td>James, Henry</td>
+<td align="center">9</td>
+</tr>
+
+<tr>
+<td>Roy, Lillian Elizabeth</td>
+<td align="center">9</td>
+</tr>
+
+<tr>
+<td>Cobb, Irvin S.</td>
+<td align="center">8</td>
+</tr>
+</tbody>
+</table><p>(I omit “Anon.,” who leads with 61.)</p><p>If we tried the original data set before filtering without removing distinct titles at all, the list would be</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">meta <span style="color: #ce5c00; font-weight: bold">&lt;-</span> read.csv<span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">"fiction_metadata.csv"</span><span style="color: #000000; font-weight: bold">,</span> stringsAsFactors<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #204a87; font-weight: bold">FALSE</span><span style="color: #000000; font-weight: bold">)</span>
+meta <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+filter<span style="color: #000000; font-weight: bold">(</span>date <span style="color: #ce5c00; font-weight: bold">&gt;=</span> <span style="color: #0000cf; font-weight: bold">1920</span><span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+group_by<span style="color: #000000; font-weight: bold">(</span>author<span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+summarise<span style="color: #000000; font-weight: bold">(</span>count<span style="color: #ce5c00; font-weight: bold">=</span>n<span style="color: #000000; font-weight: bold">())</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+arrange<span style="color: #000000; font-weight: bold">(</span>desc<span style="color: #000000; font-weight: bold">(</span>count<span style="color: #000000; font-weight: bold">))</span>
+</pre></div><table>
+<thead>
+<tr>
+<th>author</th>
+<th align="center">count</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>James, Henry</td>
+<td align="center">71</td>
+</tr>
+
+<tr>
+<td>Turgenev, Ivan</td>
+<td align="center">55</td>
+</tr>
+
+<tr>
+<td>Hardy, Thomas</td>
+<td align="center">51</td>
+</tr>
+
+<tr>
+<td>Conrad, Joseph</td>
+<td align="center">37</td>
+</tr>
+
+<tr>
+<td>France, Anatole</td>
+<td align="center">36</td>
+</tr>
+
+<tr>
+<td>Stevenson, Robert Louis</td>
+<td align="center">36</td>
+</tr>
+
+<tr>
+<td>Twain, Mark</td>
+<td align="center">30</td>
+</tr>
+
+<tr>
+<td>Hudson, W. H.</td>
+<td align="center">28</td>
+</tr>
+
+<tr>
+<td>Tarkington, Booth</td>
+<td align="center">26</td>
+</tr>
+</tbody>
+</table><p>If we remove distinct titles after filtering for our time-period:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">meta <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+filter <span style="color: #000000; font-weight: bold">(</span>date <span style="color: #ce5c00; font-weight: bold">&gt;=</span> <span style="color: #0000cf; font-weight: bold">1920</span><span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+distinct<span style="color: #000000; font-weight: bold">(</span>title<span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+group_by<span style="color: #000000; font-weight: bold">(</span>author<span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+summarise<span style="color: #000000; font-weight: bold">(</span>count<span style="color: #ce5c00; font-weight: bold">=</span>n<span style="color: #000000; font-weight: bold">())</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+arrange<span style="color: #000000; font-weight: bold">(</span>desc<span style="color: #000000; font-weight: bold">(</span>count<span style="color: #000000; font-weight: bold">))</span>
+</pre></div><table>
+<thead>
+<tr>
+<th>author</th>
+<th align="center">count</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>James, Henry</td>
+<td align="center">26</td>
+</tr>
+
+<tr>
+<td>France, Anatole</td>
+<td align="center">23</td>
+</tr>
+
+<tr>
+<td>Conrad, Joseph</td>
+<td align="center">20</td>
+</tr>
+
+<tr>
+<td>Turgenev, Ivan</td>
+<td align="center">20</td>
+</tr>
+
+<tr>
+<td>Stevenson, Robert Louis</td>
+<td align="center">17</td>
+</tr>
+
+<tr>
+<td>Tarkington, Booth</td>
+<td align="center">15</td>
+</tr>
+
+<tr>
+<td>Henry, O.</td>
+<td align="center">14</td>
+</tr>
+
+<tr>
+<td>Hope, Laura Lee</td>
+<td align="center">14</td>
+</tr>
+
+<tr>
+<td>Curwood, James Oliver</td>
+<td align="center">13</td>
+</tr>
+</tbody>
+</table><p>Though it can be misleading, a quick glance at these authors 
+supports the contention that eliminating duplicate titles before 
+filtering by date will produce data with the fewest reprints of these 
+simple methods.</p><h4 id="preparing-for-topic-modeling">Preparing for Topic Modeling</h4><p>The data set that we will topic model will be the one produced by the following commands:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">meta <span style="color: #ce5c00; font-weight: bold">&lt;-</span> read.csv<span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">"fiction_metadata.csv"</span><span style="color: #000000; font-weight: bold">,</span> stringsAsFactors<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #204a87; font-weight: bold">FALSE</span><span style="color: #000000; font-weight: bold">)</span>
+meta <span style="color: #ce5c00; font-weight: bold">&lt;-</span> meta <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+distinct<span style="color: #000000; font-weight: bold">(</span>title<span style="color: #000000; font-weight: bold">)</span> <span style="color: #ce5c00; font-weight: bold">%&gt;%</span>
+filter <span style="color: #000000; font-weight: bold">(</span>date <span style="color: #ce5c00; font-weight: bold">&gt;=</span> <span style="color: #0000cf; font-weight: bold">1920</span><span style="color: #000000; font-weight: bold">)</span> 
+</pre></div><p>It should have 3014 rows. Before we load the package that
+ will perform the topic modeling, we have to save our filtered csv 
+metadata file and create a new directory containing only those .tsv 
+files that correspond to it. To save the file:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">write.csv<span style="color: #000000; font-weight: bold">(</span>meta<span style="color: #000000; font-weight: bold">,</span> file<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #4e9a06">"fiction_metadata_1920-22.csv"</span><span style="color: #000000; font-weight: bold">,</span> row.names<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #204a87; font-weight: bold">FALSE</span><span style="color: #000000; font-weight: bold">)</span>
+</pre></div><p><strong>[Note:&nbsp;</strong></p><p><strong>&nbsp; - Due 
+to the newer version 'dplyr' that now installs (28th Nov 2018), you need
+ to provide an additional argument to 'distinct()' so all the columns 
+are returned, not just the column that the distinct operation is applied
+ to. &nbsp;The new line looks like:<br style="">&nbsp; &nbsp; - distinct(title,.keep_all=TRUE) %&gt;%<br>&nbsp; &nbsp;+ with the older version of dplyr now installed, the above should not be needed&nbsp;<br><span class="sw-mn-ph">&nbsp;</span></strong><strong>]&nbsp;</strong></p><p>I
+ would create a new directory named “20-20-tsv” or similar for the files
+ that match our filtered metadata. To copy them over, you can use a 
+simple perl script like this:</p><p><strong>[Note: The Perl script below
+ actually assumes the directory is "20-22-tsv" and the CSV file 
+processed has been called "fiction_metadata_1920-1922.csv". &nbsp;In the
+ Data Capsule we will work with the "20-22-tsv" folder name, and in the 
+copy.pl script have changed the directory to use the CSV file that was 
+actually generated by the previous set, 
+"fiction_metadata_1920-22.csv"&nbsp;<br style="">&nbsp; &nbsp; mkdir 20-22-tsv<br style="">&nbsp; &nbsp; ./copy.pl<br style="">]&nbsp;</strong></p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #204a87; font-weight: bold">use</span> <span style="color: #000000">utf8</span><span style="color: #000000; font-weight: bold">;</span> <span style="color: #8f5902; font-style: italic">#not really necessary</span>
+<span style="color: #204a87">binmode</span> <span style="color: #3465a4">STDOUT</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #4e9a06">":utf8"</span><span style="color: #000000; font-weight: bold">;</span> 
+
+<span style="color: #204a87">open</span> <span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">META</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #4e9a06">"fiction_metadata_1900-1922.csv"</span><span style="color: #000000; font-weight: bold">)</span> <span style="color: #204a87; font-weight: bold">or</span> <span style="color: #204a87">die</span> <span style="color: #4e9a06">"Can't"</span><span style="color: #000000; font-weight: bold">;</span>
+<span style="color: #204a87">binmode</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">META</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #4e9a06">":utf8"</span><span style="color: #000000; font-weight: bold">);</span>
+
+<span style="color: #204a87; font-weight: bold">while</span> <span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&lt;META&gt;</span><span style="color: #000000; font-weight: bold">)</span> <span style="color: #000000; font-weight: bold">{</span>
+  
+  
+  <span style="color: #000000">@sp</span><span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #204a87">split</span><span style="color: #4e9a06">/,/</span><span style="color: #000000; font-weight: bold">;</span>
+  
+  <span style="color: #000000">$record</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #000000">$sp</span><span style="color: #000000; font-weight: bold">[</span><span style="color: #0000cf; font-weight: bold">0</span><span style="color: #000000; font-weight: bold">];</span>
+  <span style="color: #000000">$record</span><span style="color: #ce5c00; font-weight: bold">=~</span> <span style="color: #4e9a06">s/\"//g</span><span style="color: #000000; font-weight: bold">;</span>
+  
+  <span style="color: #204a87; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">$record</span> <span style="color: #204a87; font-weight: bold">eq</span> <span style="color: #4e9a06">"htid"</span><span style="color: #000000; font-weight: bold">)</span> <span style="color: #000000; font-weight: bold">{</span>
+    <span style="color: #204a87; font-weight: bold">next</span><span style="color: #000000; font-weight: bold">;</span>
+  <span style="color: #000000; font-weight: bold">}</span>
+  
+  <span style="color: #000000">$fi</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #000000">$record</span><span style="color: #000000; font-weight: bold">;</span>
+  <span style="color: #000000">$fi</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #000000">$fi</span><span style="color: #ce5c00; font-weight: bold">.</span><span style="color: #4e9a06">"\.tsv"</span><span style="color: #000000; font-weight: bold">;</span>
+
+<span style="color: #204a87; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">$fi</span> <span style="color: #ce5c00; font-weight: bold">=~</span> <span style="color: #4e9a06">m/\$/</span><span style="color: #000000; font-weight: bold">)</span> <span style="color: #000000; font-weight: bold">{</span>
+    
+    <span style="color: #000000">$fi</span> <span style="color: #ce5c00; font-weight: bold">=~</span> <span style="color: #4e9a06">s/\$/\\\$/g</span><span style="color: #000000; font-weight: bold">;</span> <span style="color: #8f5902; font-style: italic"># '$' characters in hathi ids cause problems if not escaped</span>
+    
+
+<span style="color: #000000; font-weight: bold">}</span>
+  
+  <span style="color: #4e9a06">`cp tsv/$fi 20-22-tsv/$fi`</span><span style="color: #000000; font-weight: bold">;</span>
+  <span style="color: #000000; font-weight: bold">}</span>
+</pre></div><p>Save that code as “copy.pl” in the directory that contains your metadata file and the tsv directories and run <code>perl copy.pl</code>.
+ (I’m aware that things would be simpler if I kept all the code to one 
+language, but I don’t have the patience to do something in R that I can 
+do very quickly in perl. It’s one of my many failings.)</p><p>We are 
+almost ready to load the topic-modeling package. It is likely that if 
+you skip the following step, a spurious topic will be generated 
+consisting of words that begin with the unicode ligatures <strong>ﬁ</strong> and <strong>ﬂ</strong>.</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #204a87">cd </span>20-22-tsv
+perl -CSD -pi -e <span style="color: #4e9a06">'s/[\x{FB01}]/fi/g'</span> *.tsv
+perl -CSD -pi -e <span style="color: #4e9a06">'s/[\x{FB02}]/fl/g'</span> *.tsv
+</pre></div><p><strong>[ Note: This can be accomplished with<br style="">&nbsp; &nbsp; ./fix-ligatures.sh&nbsp;<br style="">]&nbsp;</strong></p><p>(See this stackoverflow <a href="http://stackoverflow.com/a/12680858/2619203">answer</a> (and this <a href="http://stackoverflow.com/questions/6162484/why-does-modern-perl-avoid-utf-8-by-default/6163129#6163129">legendary one</a>)
+ for more details on this irksome issue. This step requires a version of
+ perl later than 5.08. There are doubtless other ways to handle this 
+with python or even R, but perl is what I resort to in times of crisis, 
+and I’m too old to go changing my ways.)</p><p>Now that we have prepared
+ our files, we need to install the R package that will topic model them.
+ I have added a few functions to Andrew Goldstone’s <a href="http://github.com/agoldst/dfrtopics">dfrtopics</a> to process the HathiTrust files. To install my fork in R:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">library<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>devtools<span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+install_github<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span><span style="color: rgb(78, 154, 6);">"joncgoodwin/dfrtopics"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+</pre></div><p>Before loading the library, we will need to allocate more memory to java:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">options<span style="color: #000000; font-weight: bold">(</span>java.parameters<span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #4e9a06">"-Xmx8g"</span><span style="color: #000000; font-weight: bold">)</span>
+</pre></div><p>This would allocate 8 gigabytes of memory. My laptop has 
+16, and this much memory usually won’t cause any serious problems. Four 
+may be enough, but Java (which is called by the RMallet package that is 
+loaded by the package) will run out of memory quite quickly with larger 
+models.</p><p>Now we load the library:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">library<span style="color: #000000; font-weight: bold">(</span>dfrtopics<span style="color: #000000; font-weight: bold">)</span>
+</pre></div><p><strong>[Note: From installing "devtools" through the loading the "dfrtopics" library can be done with:<br style="">&nbsp; &nbsp; source("get-goodwin-dfrtopics.R")<br style="">]&nbsp;</strong></p><p>Next we must process the metadata file and read the tsv files:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">meta <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> read_hathi_metadata<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span><span style="color: rgb(78, 154, 6);">"sample-1900-1922.csv"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+counts <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> read_wordcounts_hathi<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>list.files<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span><span style="color: rgb(78, 154, 6);">"sample-00-22-tsv"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">,</span> full.names<span style="color: rgb(206, 92, 0); font-weight: bold;">=</span><span style="color: rgb(32, 74, 135); font-weight: bold;">T</span><span style="color: rgb(0, 0, 0); font-weight: bold;">))</span>
+</pre></div><p><strong>[Note: The CVS filename given above seems way off. &nbsp;Should be "fiction_metadata_1920-22.csv"&nbsp;<br>&nbsp;
+ &nbsp; &nbsp;- Had to change the 'htid' heading to 'id' for 
+read_hathi_metadata() to be happy (for latest version, but not true in 
+0.4.3 version)&nbsp;<br></strong><strong>Also, the read_wordcounts_hathi function is not exported, and so needs to be called with:&nbsp;<br>&nbsp; + counts &lt;- dfrtopics:::read_wordcounts_hathi(list.files("20-22-tsv", full.names=T))<br><br>+ These modified lines can be run with:<br>&nbsp; + source("prepare.R")&nbsp;<br>]</strong>&nbsp;</p><p>The
+ next stop involves making a stopword list. Stopwords are those that the
+ model will ignore. MALLET, the tool that this R package uses, comes 
+with a default stopword list. The <code>dfrtopics</code> package also includes an expanded <a href="https://github.com/agoldst/dfrtopics/blob/master/inst/stoplist/stoplist.txt">one</a>.
+ Adding stopwords is an interpretive decision. Without the most common 
+English prepositions and articles stopped, the model will be almost 
+useless. What you do from there, however, depends on what you are 
+looking for. The list that I use has many names. The one packaged with <code>dfrtopics</code>
+ has even more names. Names will dominate any topic model made of 
+fiction if they are not blocked. There are imaginable reasons, however, 
+why someone might want to see this behavior.</p><p>Once you have decided on a stopword list, apply it to your data with</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">stoplist <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> readLines<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span><span style="color: #4e9a06">"stopwords.txt"</span><span style="color: #000000; font-weight: bold">)</span>
+counts <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> counts <span style="color: rgb(206, 92, 0); font-weight: bold;">%&gt;%</span> wordcounts_remove_stopwords<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>stoplist<span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+</pre></div><p>(This assumes that your stopword list is in the working directory and named “stopwords.txt”.)</p><p><strong>[Note:
+ Have developed a short script to the above which directly uses the 
+"stopwords.txt" file located within the 'dfrtopics' installed 
+package.&nbsp;<br style="">&nbsp; &nbsp;source("remove-stopwords.R")<br style="">]</strong></p><p>As Andrew Goldstone explains <a href="https://github.com/agoldst/dfrtopics/blob/master/vignettes/introduction.Rmd">here</a>,
+ LDA does not perform well with many words that are used infrequently. 
+(As you can see, I’m following this tutorial almost step-by-step here.) 
+To keep only the most 20K frequently used words:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">counts <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> counts <span style="color: rgb(206, 92, 0); font-weight: bold;">%&gt;%</span> wordcounts_remove_rare<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span><span style="color: rgb(0, 0, 207); font-weight: bold;">20000</span><span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+</pre></div><p>The next two commands will transform our data to a form suitable to be sent to MALLET:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">docs <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> wordcounts_texts<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>counts<span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+ilist <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> make_instances<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>docs<span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+</pre></div><p>Determining how many topics to model is the next step. 
+With about 3000 files of this size and an aggressive stopword approach, I
+ have found that somewhere between 100-150 topics gives the best 
+results. Typically, you will need to run the model several times to find
+ a useful number of topics. We will choose 100 topics for this example:</p><div class="highlight" style="background: rgb(248, 248, 248) none repeat scroll 0% 0%;"><pre style="line-height: 125%;">m <span style="color: rgb(206, 92, 0); font-weight: bold;">&lt;-</span> train_model<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>ilist<span style="color: rgb(0, 0, 0); font-weight: bold;">,</span> n_topics<span style="color: rgb(206, 92, 0); font-weight: bold;">=</span><span style="color: rgb(0, 0, 207); font-weight: bold;">100</span><span style="color: rgb(0, 0, 0); font-weight: bold;">,</span> n_iters<span style="color: rgb(206, 92, 0); font-weight: bold;">=</span><span style="color: rgb(0, 0, 207); font-weight: bold;">200</span><span style="color: rgb(0, 0, 0); font-weight: bold;">,</span>metadata<span style="color: rgb(206, 92, 0); font-weight: bold;">=</span>meta<span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+</pre></div><p>There are several parameters that can be passed to the <code style="">train_model</code>
+ function. The “n_iters” parameter affects the quality of the model and 
+also the length of time it will take to run. With a 100-topic model and 
+200 iterations on my laptop, this code will finish in about thirty 
+minutes.</p><p>As the MALLET process is running, you will see it report 
+on the total number of tokens in your corpus. It will list a series of 
+log likelihood figures (that should descend with each iteration). Every 
+fifty iterations it will print out a list of the topics it has inferred 
+at that point.</p><p>Once it has finished, we are ready to make a browser to explore the model. First, we need to export the data we just created:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">export_ht_browser_data<span style="color: rgb(0, 0, 0); font-weight: bold;">(</span>m<span style="color: rgb(0, 0, 0); font-weight: bold;">,</span> <span style="color: rgb(78, 154, 6);">"data"</span><span style="color: rgb(0, 0, 0); font-weight: bold;">)</span>
+</pre></div><p><strong><span class="dehighlight-node" style="background-color: rgb(59, 75, 91); color: rgb(223, 255, 255);">[Note: If running this command again, it will fail if you already have files in the 'data'&nbsp;folder]</span></strong></p><p>The
+ final step of this function creates a “topic_scaled.csv” file. It will 
+currently take significantly longer than the rest of the files. This 
+file is not necessary to see the majority of the browser, and an update 
+to the <code>dfrtopics</code> package has been made to make it much 
+faster. My fork does not yet contain it, however. I will update this 
+section when it does.</p><p>I have modified <code>dfr-browser</code> to work with this HathiTrust data. Install my fork with <code>git clone https://github.com/joncgoodwin/dfr-browser.git</code>.
+ Now copy the files from that “data” directory you just created into 
+“dfr-browser/data”. To complete the process, enter these shell commands:</p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #204a87">cd </span>dfr-browser
+bin/server
+</pre></div><p>Open “localhost:8888” in your web browser. If all went 
+according to plan, you should see your topic browser. A browser of the 
+1920-1922 fiction data created with the 
+filtering-distinct-titles-before-filtering-by-date method is <a href="http://jgoodwin.net/htb">here</a>.</p></article></div></section><div class="social"><span class="Facebook"><div id="fb-root"></div><div class="fb-like" data-href="https://jgoodwin.net/blog/creating-hathitrust-topic-browser/" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div></span></div><aside id="meta"><div><ul class="catlist">
+          <li><em>&nbsp;Categories</em></li>
+          
+            <li><a href="https://jgoodwin.net/categories/topic-modeling">Topic Modeling</a></li>
+          
+            <li><a href="https://jgoodwin.net/categories/quantitative-methods">Quantitative Methods</a></li>
+          
+        </ul></div><div><section id="next">&nbsp;<em>« Previous:</em> <a class="next" href="https://jgoodwin.net/blog/purity/">Purity</a>
+</section>
+<section id="prev">
+&nbsp;<em>» Next:</em> <a class="previous" href="https://jgoodwin.net/blog/fiction-1700-1922/">One Hundred Topics (1700-1922)</a><br></section></div></aside><meta itemprop="wordCount" content="1933"><meta itemprop="datePublished" content="2015-09-22"><meta itemprop="url" content="https://jgoodwin.net/blog/creating-hathitrust-topic-browser/"><footer></footer></div><div style="position:absolute;width:1px;height:1px;display:none;z-index:-500" class="sw-protect"><textarea style="width:1px;height:1px;border-style:none"></textarea></div><div style="position: absolute; width: 2px; visibility: hidden; background-color: black; z-index: 100; left: 497px; top: 630px; height: 18px;" class="sw-protect sw-cursor"></div><div style="position: absolute; width: 1px; height: 1px; z-index: -500; left: -50px; top: 356px; display: none;" class="sw-protect"><input style="border-style:none" type="text"></div><div style="position: absolute; display: none; background-color: rgb(54, 55, 54); color: white; z-index: 9002; width: 100px; height: 20px;" class="sw-protect" id="popUpDiv"></div></body></html>
